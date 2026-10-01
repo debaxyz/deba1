@@ -18,7 +18,30 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-
+    packaging {
+        resources {
+            excludes += arrayOf(
+                "DebugProbesKt.bin",
+                "kotlin-tooling-metadata.json",
+                "kotlin/**",
+                "META-INF/*.version",
+                "META-INF/**/LICENSE.txt"
+            )
+        }
+        dex {
+            useLegacyPackaging = true
+        }
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+    lint {
+        checkReleaseBuilds = false
+    }
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.deba1"
